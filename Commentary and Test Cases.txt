@@ -1,0 +1,1021 @@
+/**
+* Name: Joseph Flaherty
+* Project: CILisp
+* Date: 5/8/19
+**/
+
+*****/COMMENTARY/*****
+
+
+*****/TEST RUNS/*****
+
+
+
+//run 1:
+
+> (add ((let (abcd 1)) (sub 3 abcd)) 4)
+(add ((let (abcd 1)) (sub 3 abcd)) 4)
+lex: LPAREN
+lex: FUNC sval = add
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = abcd
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sub
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: SYMBOL sval = abcd
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: INTEGER dval = 4.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> (mult ((let (a 1) (b 2)) (add a b)) (sqrt 2))
+(mult ((let (a 1) (b 2)) (add a b)) (sqrt 2))
+lex: LPAREN
+lex: FUNC sval = mult
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = a
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: SYMBOL sval = b
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = b
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: LPAREN
+lex: FUNC sval = sqrt
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> (add ((let (a ((let (b 2)) (mult b (sqrt 10))))) (div a 2)) ((let (c 5)) (sqrt c)))
+(add ((let (a ((let (b 2)) (mult b (sqrt 10))))) (div a 2)) ((let (c 5)) (sqrt c)))
+lex: LPAREN
+lex: FUNC sval = add
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = a
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = b
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = mult
+lex: SYMBOL sval = b
+yacc: s_expr ::= SYMBOL 
+lex: LPAREN
+lex: FUNC sval = sqrt
+lex: INTEGER dval = 10.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = div
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = c
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sqrt
+lex: SYMBOL sval = c
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> ((let (first (sub 5 1)) (second 2)) (add (pow 2 first) (sqrt second)))
+((let (first (sub 5 1)) (second 2)) (add (pow 2 first) (sqrt second)))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = first
+lex: LPAREN
+lex: FUNC sval = sub
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: SYMBOL sval = second
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = add
+lex: LPAREN
+lex: FUNC sval = pow
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: SYMBOL sval = first
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sqrt
+lex: SYMBOL sval = second
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> ((let (a ((let (c 3) (d 4)) (mult c d)))) (sqrt a))
+((let (a ((let (c 3) (d 4)) (mult c d)))) (sqrt a))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = a
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = c
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: SYMBOL sval = d
+lex: INTEGER dval = 4.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = mult
+lex: SYMBOL sval = c
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = d
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sqrt
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> LRAST
+LRAST
+lex: QUIT
+yacc: s_expr ::= QUIT
+
+Process finished with exit code 0
+
+
+
+
+
+
+//run 2:
+
+> ((let (integer a 1))(print a))
+((let (integer a 1))(print a))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: TYPE(int) dval = 1.000000
+lex: SYMBOL sval = a
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = print
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+1.00 
+
+> ((let (real b 10))(print b))
+((let (real b 10))(print b))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: TYPE(real) dval = 2.000000
+lex: SYMBOL sval = b
+lex: INTEGER dval = 10.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = print
+lex: SYMBOL sval = b
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+10.00 
+
+> ((let (integer a (read)) (real b (read))) (print a b))
+((let (integer a (read)) (real b (read))) (print a b))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: TYPE(int) dval = 1.000000
+lex: SYMBOL sval = a
+lex: LPAREN
+lex: FUNC sval = read
+lex: RPAREN
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: TYPE(real) dval = 2.000000
+lex: SYMBOL sval = b
+lex: LPAREN
+lex: FUNC sval = read
+lex: RPAREN
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = print
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = b
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+a := 6
+6
+6 b := 4
+4
+4 
+
+> ((let (a 100)) (cond (smaller (rand) 100) (add a 2) (sub a 2)))
+((let (a 100)) (cond (smaller (rand) 100) (add a 2) (sub a 2)))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = a
+lex: INTEGER dval = 100.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: COND
+lex: LPAREN
+lex: FUNC sval = smaller
+lex: LPAREN
+lex: FUNC sval = rand
+lex: RPAREN
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: INTEGER dval = 100.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sub
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN COND s_expr s_expr s_expr RPAREN 
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> LRAST
+LRAST
+lex: QUIT
+yacc: s_expr ::= QUIT
+
+Process finished with exit code 0
+
+
+
+
+
+
+//run 3:
+
+> ((let (myA (read))(myB (rand)))(cond (smaller myA myB) (print myA) (print myB)))
+((let (myA (read))(myB (rand)))(cond (smaller myA myB) (print myA) (print myB)))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = myA
+lex: LPAREN
+lex: FUNC sval = read
+lex: RPAREN
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: SYMBOL sval = myB
+lex: LPAREN
+lex: FUNC sval = rand
+lex: RPAREN
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: COND
+lex: LPAREN
+lex: FUNC sval = smaller
+lex: SYMBOL sval = myA
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = myB
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = print
+lex: SYMBOL sval = myA
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = print
+lex: SYMBOL sval = myB
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN COND s_expr s_expr s_expr RPAREN 
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+myA := 7.43
+7.43
+4.61 
+
+> (add 1 2 3 4 5)
+(add 1 2 3 4 5)
+lex: LPAREN
+lex: FUNC sval = add
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 4.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> ((let (integer a 1)(real b 2))(print a b 3))
+((let (integer a 1)(real b 2))(print a b 3))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: TYPE(int) dval = 1.000000
+lex: SYMBOL sval = a
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: TYPE(real) dval = 2.000000
+lex: SYMBOL sval = b
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = print
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = b
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+1.00 2.00 3.00 
+
+> LRAST
+LRAST
+lex: QUIT
+yacc: s_expr ::= QUIT
+
+Process finished with exit code 0
+
+
+
+
+
+
+//run 4:
+
+> ((let (real myFunc lambda (x y) (mult (add x 5) (sub y 2)))) (sub (myFunc 3 5) 2))
+((let (real myFunc lambda (x y) (mult (add x 5) (sub y 2)))) (sub (myFunc 3 5) 2))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: TYPE(real) dval = 2.000000
+lex: SYMBOL sval = myFunc
+lex: LAMBDA
+lex: LPAREN
+lex: SYMBOL sval = x
+lex: SYMBOL sval = y
+lex: RPAREN
+yacc: arg_list ::= SYMBOL
+yacc: arg_list ::= SYMBOL arg_list
+lex: LPAREN
+lex: FUNC sval = mult
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = x
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sub
+lex: SYMBOL sval = y
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL LAMBDA LPAREN arg_list RPAREN s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sub
+lex: LPAREN
+lex: SYMBOL sval = myFunc
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> ((let (f lambda (x y) (add x y)))(f (sub 5 2) (mult 2 3)))
+((let (f lambda (x y) (add x y)))(f (sub 5 2) (mult 2 3)))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: LAMBDA
+lex: LPAREN
+lex: SYMBOL sval = x
+lex: SYMBOL sval = y
+lex: RPAREN
+yacc: arg_list ::= SYMBOL
+yacc: arg_list ::= SYMBOL arg_list
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = x
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = y
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL LAMBDA LPAREN arg_list RPAREN s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: LPAREN
+lex: FUNC sval = sub
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = mult
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> ((let (a 1) (f lambda (x y) (add x y)))(f 2 (f a 3)))
+((let (a 1) (f lambda (x y) (add x y)))(f 2 (f a 3)))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = a
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: LAMBDA
+lex: LPAREN
+lex: SYMBOL sval = x
+lex: SYMBOL sval = y
+lex: RPAREN
+yacc: arg_list ::= SYMBOL
+yacc: arg_list ::= SYMBOL arg_list
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = x
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = y
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL LAMBDA LPAREN arg_list RPAREN s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> LRAST
+LRAST
+lex: QUIT
+yacc: s_expr ::= QUIT
+
+Process finished with exit code 0
+
+
+
+
+
+
+//run 5:
+
+
+> ((let (real myFunc lambda (x y) (mult (add x 5) (sub y 2)))) (sub (myFunc 3 5) 2))
+((let (real myFunc lambda (x y) (mult (add x 5) (sub y 2)))) (sub (myFunc 3 5) 2))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: TYPE(real) dval = 2.000000
+lex: SYMBOL sval = myFunc
+lex: LAMBDA
+lex: LPAREN
+lex: SYMBOL sval = x
+lex: SYMBOL sval = y
+lex: RPAREN
+yacc: arg_list ::= SYMBOL
+yacc: arg_list ::= SYMBOL arg_list
+lex: LPAREN
+lex: FUNC sval = mult
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = x
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sub
+lex: SYMBOL sval = y
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL LAMBDA LPAREN arg_list RPAREN s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: FUNC sval = sub
+lex: LPAREN
+lex: SYMBOL sval = myFunc
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> ((let (f lambda (x y) (add x y)))(f (sub 5 2) (mult 2 3)))
+((let (f lambda (x y) (add x y)))(f (sub 5 2) (mult 2 3)))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: LAMBDA
+lex: LPAREN
+lex: SYMBOL sval = x
+lex: SYMBOL sval = y
+lex: RPAREN
+yacc: arg_list ::= SYMBOL
+yacc: arg_list ::= SYMBOL arg_list
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = x
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = y
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL LAMBDA LPAREN arg_list RPAREN s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: LPAREN
+lex: FUNC sval = sub
+lex: INTEGER dval = 5.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: LPAREN
+lex: FUNC sval = mult
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> ((let (integer a 1) (f lambda (x y) (add x y)))(f 2 (f a 3)))
+((let (integer a 1) (f lambda (x y) (add x y)))(f 2 (f a 3)))
+lex: LPAREN
+lex: LPAREN
+lex: LET
+lex: LPAREN
+lex: TYPE(int) dval = 1.000000
+lex: SYMBOL sval = a
+lex: INTEGER dval = 1.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: let_elem ::= LPAREN TYPE SYMBOL s_expr RPAREN
+yacc: let_list ::= LET let_elem
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: LAMBDA
+lex: LPAREN
+lex: SYMBOL sval = x
+lex: SYMBOL sval = y
+lex: RPAREN
+yacc: arg_list ::= SYMBOL
+yacc: arg_list ::= SYMBOL arg_list
+lex: LPAREN
+lex: FUNC sval = add
+lex: SYMBOL sval = x
+yacc: s_expr ::= SYMBOL 
+lex: SYMBOL sval = y
+yacc: s_expr ::= SYMBOL 
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN FUNC s_expr_list RPAREN
+lex: RPAREN
+yacc: let_elem ::= LPAREN SYMBOL LAMBDA LPAREN arg_list RPAREN s_expr RPAREN
+yacc: let_list ::= let_list let_elem
+lex: RPAREN
+yacc: let_section ::= LPAREN let_list RPAREN
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: INTEGER dval = 2.000000
+yacc: s_expr ::= INTEGER
+lex: LPAREN
+lex: SYMBOL sval = f
+lex: SYMBOL sval = a
+yacc: s_expr ::= SYMBOL 
+lex: INTEGER dval = 3.000000
+yacc: s_expr ::= INTEGER
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr_list ::= s_expr
+yacc: s_expr_list ::= s_expr s_expr_list
+yacc: s_expr ::= LPAREN SYMBOL s_expr_list RPAREN
+lex: RPAREN
+yacc: s_expr ::= LPAREN let_section s_expr RPAREN 
+lex: EOL
+yacc: program ::= s_expr EOL
+
+> LRAST
+LRAST
+lex: QUIT
+yacc: s_expr ::= QUIT
+
+Process finished with exit code 0
