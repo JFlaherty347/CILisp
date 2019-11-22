@@ -1,7 +1,7 @@
 # CILisp
 CILisp is Lisp-spinoff compiler written in C using Flex and Bison.
 
-Some examples of a program written in CILisp that can be compiled by this compiler are:
+### Example Programs
 ```
 (add ((let (abcd 1)) (sub 3 abcd)) 4)
 ```
@@ -41,7 +41,8 @@ there is support for input/output, conditionals, and variables. Op lists allow f
 
 ### What CILisp Does
 CILisp performs both sytactic and semantic analysis to produce an intermediate form of the compiled code. This intermediate
-form is made up of various types of nodes that carry different pieces of information.
+form is made up of various types of nodes that carry different pieces of information. CILisp uses a context-free grammar,
+meaning that all transition rules are available at any point.
 
 ### Takeaways from CILisp
 While CILisp is a great excercise in creating a compiler, I found the most value in understanding exactly how compilers are
@@ -51,3 +52,6 @@ excercise in project planning. Over the course of several weeks I was tasked wit
 to schedule my work in order to complete the task on time. Finally, with the large list of features in CILisp, I learned how
 to write robust code that is easily expandable. Through adding many features I was able to create a framework that could be
 easily iterated and improved so that CILisp could not only implement new features but maintain the usefulness of previous features.
+
+### A Note About This Repository
+Please note that this repository was created after CILisp was programmed and as a result only contains minor update commits rather than major functionality updates.
