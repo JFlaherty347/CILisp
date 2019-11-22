@@ -54,4 +54,5 @@ to write robust code that is easily expandable. Through adding many features I w
 easily iterated and improved so that CILisp could not only implement new features but maintain the usefulness of previous features.
 
 ### A Note About This Repository
-Please note that this repository was created after CILisp was programmed and as a result only contains minor update commits rather than major functionality updates.
+Please note that this repository was created after CILisp was programmed and as a result only contains minor update commits rather than major functionality updates. This project was created during the sophmore year of my undergraduate studies at
+CSUCI.
