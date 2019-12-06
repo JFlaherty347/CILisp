@@ -1,5 +1,5 @@
 # CILisp
-CILisp is a Lisp-spinoff compiler written in C using Flex and Bison.
+CILisp is a Lisp-spinoff [interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing)) written in C using Flex and Bison.
 
 ### Example Programs
 ```
